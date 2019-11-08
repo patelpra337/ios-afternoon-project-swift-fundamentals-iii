@@ -43,7 +43,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cadButtonTapped(_ sender: UIButton) {
+        cadButton.isSelected = false
+        mxnButton.isSelected = true
         
+        if mxnButton.isSelected == true {
+            currency = .mxn
+        }
     }
     
     @IBAction func mxnButtonTapped(_ sender: UIButton) {
@@ -56,7 +61,7 @@ class ViewController: UIViewController {
         if currency == .cad {
             let conversion = 0.76 * dollars
             return conversion
-        } else if currency = .mxn {
+        } else if currency == .mxn {
             let conversion = 0.052 * dollars
             return conversion
         } else {
