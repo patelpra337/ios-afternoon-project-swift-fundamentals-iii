@@ -8,7 +8,14 @@
 
 import UIKit
 
+enum Currency {
+    case cad
+    case mxn
+}
+
 class ViewController: UIViewController {
+    
+    var currency: Currency = .cad
     
     // MARK: - Outlets/Properties
     
@@ -23,7 +30,16 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func convertButtonTapped(_ sender: UIButton) {
+        guard let userInput = fromCurrencyTextField.text else {
+            return
+        }
         
+        guard let dollars = Double(userInput) else {
+            return
+        }
+        
+        let conversion = convert(dollars)
+        toCurrencyTextField.text = "\(conversion)"
     }
     
     @IBAction func cadButtonTapped(_ sender: UIButton) {
@@ -35,5 +51,17 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Helper Methods
+    
+    func convert(_ dollars: Double) -> Double {
+        if currency == .cad {
+            let conversion = 0.76 * dollars
+            return conversion
+        } else if currency = .mxn {
+            let conversion = 0.052 * dollars
+            return conversion
+        } else {
+            return 0
+        }
+    }
 }
 
